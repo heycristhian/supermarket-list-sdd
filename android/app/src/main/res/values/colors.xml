@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Cores de plataforma: devem ser iguais a BrandColors.grayDark (lib/ui/theme/brand_colors.dart). -->
+<resources>
+    <color name="ic_launcher_background">#4C4E53</color>
+    <color name="splash_background">#4C4E53</color>
+</resources>

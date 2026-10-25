@@ -1,0 +1,6 @@
+# LF em todos os arquivos de texto, em qualquer sistema: o dart format usa LF
+# e o hook de pre-commit (sh) não roda com CRLF.
+* text=auto eol=lf
+
+*.bat text eol=crlf
+*.cmd text eol=crlf

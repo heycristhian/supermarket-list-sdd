@@ -1,0 +1,26 @@
+#!/bin/sh
+# Gates da constituição (research.md R19). Funciona com o projeto na raiz do
+# repositório ou em projetos/supermarket-list dentro do workspace.
+# Instalação manual, na raiz do repositório:
+#   cp tool/git-hooks/pre-commit .git/hooks/pre-commit
+
+root=$(git rev-parse --show-toplevel) || exit 1
+if [ -f "$root/pubspec.yaml" ]; then
+  project=""
+else
+  project="projetos/supermarket-list/"
+fi
+
+if ! git diff --cached --name-only | grep -q "^$project"; then
+  exit 0
+fi
+
+cd "$root/$project" || exit 1
+
+echo "pre-commit: rodando os gates..."
+dart format --output=none --set-exit-if-changed . || {
+  echo "pre-commit: rode 'dart format .' e tente de novo."
+  exit 1
+}
+flutter analyze || exit 1
+flutter test || exit 1
